@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Todo List</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: #e3f2fd; /* lighter blue background */
+        color: #0d47a1; /* strong blue for text */
+        margin: 2em;
+      }
+
+      h1 {
+        color: #01579b; /* dark blue */
+        letter-spacing: 1px;
+        margin-bottom: 1em;
+        text-shadow: 0 2px 8px #b3e5fc55;
+      }
+
+      form {
+        display: flex;
+        gap: 0.5em;
+        margin-bottom: 1.5em;
+      }
+
+      input[type="text"] {
+        flex: 1;
+        padding: 0.5em 1em;
+        border: 2px solid #039be5; /* strong blue border */
+        border-radius: 4px;
+        font-size: 1em;
+        background: #ffffff;
+        color: #01579b;
+        outline: none;
+        transition: border 0.2s, background 0.2s;
+      }
+
+      input[type="text"]:focus {
+        border: 2px solid #01579b;
+        background: #e1f5fe;
+      }
+
+      button {
+        background-color: #039be5; /* matches the add button */
+        color: #fff;
+        border: none;
+        padding: 0.5em 1.2em;
+        border-radius: 4px;
+        font-size: 1em;
+        cursor: pointer;
+        transition: background 0.2s, box-shadow 0.2s;
+        box-shadow: 0 2px 8px #039be555;
+        font-weight: bold;
+      }
+
+      button:hover {
+        background-color: #01579b;
+        box-shadow: 0 4px 12px #01579b55;
+      }
+
+      #todo-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        max-width: 500px;
+      }
+
+      #todo-list li {
+        background: #ffffff;
+        margin-bottom: 0.7em;
+        padding: 0.7em 1em;
+        border-radius: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        box-shadow: 0 2px 8px #039be522;
+        border-left: 5px solid #039be5;
+        color: #01579b;
+        font-weight: 500;
+        transition: background 0.2s, border 0.2s;
+      }
+
+      #todo-list li:hover {
+        background: #e1f5fe;
+        border-left: 5px solid #01579b;
+      }
+
+      .remove-btn {
+        margin-left: 1em;
+        color: #01579b;
+        cursor: pointer;
+        font-size: 1.3em;
+        font-weight: bold;
+        transition: color 0.2s, text-shadow 0.2s;
+        text-shadow: 0 2px 8px #b3e5fc55;
+      }
+
+      .remove-btn:hover {
+        color: #e53935;
+        text-shadow: 0 2px 12px #e5393555;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Todo List</h1>
+    <form id="todo-form">
+      <input
+        type="text"
+        id="todo-input"
+        placeholder="Add a new task..."
+        required
+      />
+      <button type="submit">Add</button>
+    </form>
+    <ul id="todo-list"></ul>
+
+    <script>
+      const form = document.getElementById("todo-form");
+      const input = document.getElementById("todo-input");
+      const list = document.getElementById("todo-list");
+
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        const text = input.value.trim();
+        if (text) {
+          const li = document.createElement("li");
+          li.textContent = text;
+
+          const btn = document.createElement("span");
+          btn.textContent = "✖";
+          btn.className = "remove-btn";
+          btn.onclick = () => li.remove();
+
+          li.appendChild(btn);
+          list.appendChild(li);
+          input.value = "";
+        }
+      });
+    </script>
+  </body>
+</html>
